@@ -8,100 +8,107 @@ import RemoveFavourites from './comp/RemoveFavourites';
 import './App.css';
 
 const App = () => {
-	const [movies, setMovies] = useState([]);
-	const [favourites, setFavourites] = useState([]);
-	const [searchValue, setSearchValue] = useState('');
-	const [message, setMessage] = useState('');
+  const [movies, setMovies] = useState([]);
+  const [favourites, setFavourites] = useState([]);
+  const [searchValue, setSearchValue] = useState('');
+  const [message, setMessage] = useState('');
 
-	const defaultSearchTerms = ['batman', 'superman', 'spiderman', 'avengers', 'star wars'];
+  const defaultSearchTerms = ['batman', 'superman', 'spiderman', 'avengers', 'star wars'];
 
-	const getMovieRequest = async (searchValue) => {
-		const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=e1446db8`;
-		const response = await axiosInstance.get(url);
-		const responseJson = await response.data;
+  const getMovieRequest = async (searchValue) => {
+    try {
+      const response = await axiosInstance.get(`/movies?s=${searchValue}`);
+      const responseJson = response.data;
+      if (responseJson.Search) {
+        setMovies(responseJson.Search);
+      }
+    } catch (error) {
+      console.error('Error fetching movies:', error);
+    }
+  };
 
-		if (responseJson.Search) {
-			setMovies(responseJson.Search);
-			console.log(responseJson.Search);
-		}
-	};
+  useEffect(() => {
+    if (searchValue) {
+      getMovieRequest(searchValue);
+    } else {
+      const randomSearchTerm = defaultSearchTerms[Math.floor(Math.random() * defaultSearchTerms.length)];
+      getMovieRequest(randomSearchTerm);
+    }
+  }, [searchValue]);
 
-	useEffect(() => {
-		if (searchValue) {
-			getMovieRequest(searchValue);
-		} else {
-			const randomSearchTerm = defaultSearchTerms[Math.floor(Math.random() * defaultSearchTerms.length)];
-			getMovieRequest(randomSearchTerm);
-		}
-	}, [searchValue]);
+  useEffect(() => {
+    const fetchFavourites = async () => {
+      try {
+        const response = await axiosInstance.get('/favourites');
+        setFavourites(response.data);
+      } catch (error) {
+        console.error('Error fetching favourites:', error);
+      }
+    };
 
-	useEffect(() => {
-		const movieFavourites = JSON.parse(
-			localStorage.getItem('react-movie-app-favourites')
-		);
+    fetchFavourites();
+  }, []); // Fetch favourites only once on component mount
 
-		if (movieFavourites) {
-			setFavourites(movieFavourites);
-		}
-	}, []);
+  const addFavouriteMovie = async (movie) => {
+    try {
+      const response = await axiosInstance.post('/favourites', { movie });
+      if (response.status === 201) {
+        const newFavourites = [...favourites, movie];
+        setFavourites(newFavourites);
+        setMessage(`${movie.Title} added to favourites!`);
+        setTimeout(() => setMessage(''), 3000);
+      }
+    } catch (error) {
+      console.error('Error adding favourite:', error);
+    }
+  };
 
-	const saveToLocalStorage = (items) => {
-		localStorage.setItem('react-movie-app-favourites', JSON.stringify(items));
-	};
+  const removeFavouriteMovie = async (movie) => {
+    try {
+      const response = await axiosInstance.delete('/favourites', { data: { movieId: movie.imdbID } });
+      if (response.status === 200) {
+        const newFavourites = favourites.filter(favMovie => favMovie.imdbID !== movie.imdbID);
+        setFavourites(newFavourites);
+        setMessage(`${movie.Title} removed from favourites!`);
+        setTimeout(() => setMessage(''), 3000);
+      }
+    } catch (error) {
+      console.error('Error removing favourite:', error);
+    }
+  };
 
-	const addFavouriteMovie = (movie) => {
-		const newFavouriteList = [...favourites, movie];
-		setFavourites(newFavouriteList);
-		saveToLocalStorage(newFavouriteList);
-		setMessage(`${movie.Title} added to favourites!`);
-		setTimeout(() => setMessage(''), 3000); 
-	};
-
-	const removeFavouriteMovie = (movie) => {
-		const newFavouriteList = favourites.filter(
-			(favourite) => favourite.imdbID !== movie.imdbID
-		);
-
-		setFavourites(newFavouriteList);
-		saveToLocalStorage(newFavouriteList);
-		setMessage(`${movie.Title} removed from favourites!`);
-		setTimeout(() => setMessage(''), 3000); 
-	};
-
-	return (
-		<>
-		<div className='app-container'>
-			<div className='container mx-auto px-4 py-8 relative'>
-				<div className='flex flex-col items-center'>
-					<MovieListHeading heading='Movies' />
-					<SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
-				</div>
-				<div className='flex flex-wrap justify-center'>
-					<MovieList
-						movies={movies}
-						handleFavouritesClick={addFavouriteMovie}
-						favouriteComponent={AddFavourites}
-					/>
-				</div>
-				<div className='flex flex-col items-center mt-8'>
-					<MovieListHeading heading='Favourites' />
-				</div>
-				<div className='flex flex-wrap justify-center'>
-					<MovieList
-						movies={favourites}
-						handleFavouritesClick={removeFavouriteMovie}
-						favouriteComponent={RemoveFavourites}
-					/>
-				</div>
-			</div>
-			{message && (
-				<div className='popup-message'>
-					{message}
-				</div>
-			)}
-		</div>
-		</>
-	);
+  return (
+    <div className='app-container'>
+      <div className='container mx-auto px-4 py-8 relative'>
+        <div className='flex flex-col items-center'>
+          <MovieListHeading heading='Movies' />
+          <SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
+        </div>
+        <div className='flex flex-wrap justify-center'>
+          <MovieList
+            movies={movies}
+            handleFavouritesClick={addFavouriteMovie}
+            favouriteComponent={AddFavourites}
+          />
+        </div>
+        <div className='flex flex-col items-center mt-8'>
+          <MovieListHeading heading='Favourites' />
+        </div>
+        <div className='flex flex-wrap justify-center'>
+          <MovieList
+            movies={favourites}
+            handleFavouritesClick={removeFavouriteMovie}
+            favouriteComponent={RemoveFavourites}
+          />
+        </div>
+      </div>
+      {message && (
+        <div className='popup-message'>
+          {message}
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default App;
