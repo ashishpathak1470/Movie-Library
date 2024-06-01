@@ -1,6 +1,6 @@
-import React from 'react';
-import Slider from 'react-slick';
-import "slick-carousel/slick/slick.css"; 
+import React from "react";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 function Home() {
@@ -12,9 +12,9 @@ function Home() {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 2000,
-    cssEase: 'linear', // Ensure smooth linear transition
-    rtl: true, // Right-to-left direction
-    pauseOnHover: false, // Maintain smoothness on hover
+    cssEase: "linear",
+    rtl: true,
+    pauseOnHover: false,
     responsive: [
       {
         breakpoint: 1024,
@@ -48,28 +48,32 @@ function Home() {
     "https://cdn.mos.cms.futurecdn.net/5A85dLNZhwJUvSSHjHNsBk-1200-80.jpg.webp",
     "https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_750/https://assets.designhill.com/design-blog/wp-content/uploads/2022/10/1-48.jpg",
     "https://imgs.search.brave.com/LqMIYVyT1U-V4tbCBo1V7-5Kp95_3bFGsi6UT1APdCU/rs:fit:500:0:0/g:ce/aHR0cDovL3d3dy5p/bXBhd2FyZHMuY29t/LzE5OTQvcG9zdGVy/cy9mb3JyZXN0X2d1/bXAuanBn",
-    "https://imgs.search.brave.com/KOz4c1Kz1AzZOaHE-Qrs6t0Sf65FVaJwivzs_aTdxss/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9jZG4u/bWFydmVsLmNvbS9j/b250ZW50LzF4L2F2/ZW5nZXJzZW5kZ2Ft/ZV9sb2JfY3JkXzA1/LmpwZw"
+    "https://imgs.search.brave.com/KOz4c1Kz1AzZOaHE-Qrs6t0Sf65FVaJwivzs_aTdxss/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9jZG4u/bWFydmVsLmNvbS9j/b250ZW50LzF4L2F2/ZW5nZXJzZW5kZ2Ft/ZV9sb2JfY3JkXzA1/LmpwZw",
   ];
 
   return (
-    <section className="px-2 py-24 bg-white md:px-0 h-auto pb-16"> {/* Adjusted padding */}
+    <section className="px-2 py-24 bg-white md:px-0 h-auto pb-16">
+      {" "}
       <div className="container items-center max-w-6xl px-8 mx-auto xl:px-5">
         <div className="flex flex-wrap items-center sm:-mx-3">
           <div className="w-full md:w-1/2 md:px-3">
             <div className="w-full pb-6 space-y-6 sm:max-w-md lg:max-w-lg md:space-y-4 lg:space-y-8 xl:space-y-9 sm:pr-5 lg:pr-0 md:pb-0">
               <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-4xl lg:text-5xl xl:text-6xl">
                 <span className="block xl:inline">Useful Tools to</span>
-                <span className="block text-indigo-600 xl:inline">Help You Build Movie Library.</span>
+                <span className="block text-indigo-600 xl:inline hover:text-indigo-700">
+                  Help You Build Movie Library.
+                </span>
               </h1>
               <p className="mx-auto text-base text-gray-500 sm:max-w-md lg:text-xl md:max-w-3xl">
-              Discover the best ways to organize, manage, and expand your movie collection with ease.
+                Discover the best ways to organize, manage, and expand your
+                movie collection with ease.
               </p>
             </div>
           </div>
           <div>
             <div className="w-full h-auto overflow-hidden rounded-md shadow-xl sm:rounded-xl">
               <img
-                className='shadow-2xl'
+                className="shadow-2xl"
                 src="https://plus.unsplash.com/premium_vector-1682303466154-2161da750ac7?bg=FFFFFF&w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bW92aWUlMjBsaWJyYXJ5JTIwd2Vic2l0ZXxlbnwwfHwwfHx8MA%3D%3D"
                 alt="Movie"
               />
@@ -77,12 +81,18 @@ function Home() {
           </div>
         </div>
         <div className="mt-16">
-          <h2 className="text-3xl font-extrabold text-gray-900 mb-6">Featured Movies</h2>
+          <h2 className="text-3xl font-extrabold text-gray-900 mb-6">
+            Featured Movies
+          </h2>
           <Slider {...settings}>
             {movieImages.map((image, index) => (
               <div key={index} className="p-2">
-                <div className="w-full h-96 overflow-hidden shadow-md rounded-md flex items-center justify-center"> {/* Fixed size container */}
-                  <img src={image} alt={`Movie ${index + 1}`} className="object-cover w-full h-full" /> {/* Ensures image covers the container */}
+                <div className="hover:scale-105 hover:rounded-md w-full h-96 overflow-hidden shadow-md rounded-md flex items-center justify-center">
+                  <img
+                    src={image}
+                    alt={`Movie ${index + 1}`}
+                    className="object-cover w-full h-full"
+                  />
                 </div>
               </div>
             ))}

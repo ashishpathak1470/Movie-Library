@@ -6,7 +6,7 @@ import MovieListHeading from "./comp/MovieListHeading";
 import SearchBox from "./comp/SearchBox";
 import AddFavourites from "./comp/AddFavourite";
 import RemoveFavourites from "./comp/RemoveFavourites";
-import MoviePopup from "./comp/MoviePopup"; 
+import MoviePopup from "./comp/MoviePopup";
 import "./App.css";
 
 const App = () => {
@@ -24,7 +24,6 @@ const App = () => {
     "avengers",
     "star wars",
   ];
-  
 
   const getMovieRequest = async (searchValue) => {
     try {
@@ -61,7 +60,7 @@ const App = () => {
     };
 
     fetchFavourites();
-  }, []); 
+  }, []);
 
   const addFavouriteMovie = async (movie) => {
     try {
@@ -104,7 +103,7 @@ const App = () => {
     document
       .getElementById("favourites-section")
       .scrollIntoView({ behavior: "smooth" });
-    setShowScrollButton(false); 
+    setShowScrollButton(false);
   };
 
   return (
@@ -124,7 +123,7 @@ const App = () => {
             Go to Favorites
           </button>
         </div>
-        
+
         <div className="flex flex-wrap justify-center">
           <MovieList
             movies={movies}
@@ -158,4 +157,3 @@ const App = () => {
 };
 
 export default App;
-

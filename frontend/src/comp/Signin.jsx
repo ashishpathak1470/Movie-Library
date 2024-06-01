@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from 'axios';
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function Signin() {
@@ -13,13 +13,16 @@ function Signin() {
     const password = e.target.elements.password?.value;
 
     try {
-      const response = await axios.post('http://localhost:3000/login', { email, password });
-      localStorage.setItem('token', response.data.token);
+      const response = await axios.post("http://localhost:3000/login", {
+        email,
+        password,
+      });
+      localStorage.setItem("token", response.data.token);
       setMessage("Logged in successfully");
-      navigate('/app'); 
+      navigate("/app");
     } catch (error) {
-      console.error('Error logging in:', error);
-      setMessage('Invalid email or password');
+      console.error("Error logging in:", error);
+      setMessage("Invalid email or password");
     }
   };
 
@@ -54,9 +57,7 @@ function Signin() {
           </div>
 
           <div className="flex justify-center items-center mt-6">
-            <button
-              className="bg-indigo-600 py-2 px-4 text-sm rounded-lg border border-green hover:bg-indigo-700 shadow-2xl text-white"
-            >
+            <button className="bg-indigo-600 py-2 px-4 text-sm rounded-lg border border-green hover:bg-indigo-700 shadow-2xl text-white hover:scale-95">
               Sign In
             </button>
           </div>

@@ -20,7 +20,7 @@ function Header() {
           <Link to="/signup">
             <button
               type="button"
-              class="bg-indigo-600 py-2 px-4 text-sm  rounded-lg border border-green hover:bg-indigo-700 shadow-2xl text-white"
+              class="bg-indigo-600 py-2 px-4 text-sm  rounded-lg border border-green hover:bg-indigo-700 shadow-2xl text-white hover:scale-95"
             >
               Sign Up
             </button>
@@ -31,9 +31,7 @@ function Header() {
             </span>
           </a>
         </div>
-
       </div>
-     
     </nav>
   );
 }

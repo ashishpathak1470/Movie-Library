@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from 'axios';
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function Signup() {
@@ -8,26 +8,31 @@ function Signup() {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-  
+
     const email = e.target.elements.email?.value;
     const password = e.target.elements.password?.value;
-  
+
     try {
-      const registerResponse = await axios.post('http://localhost:3000/register', { email, password });
-      setMessage(registerResponse.data); 
-      const loginResponse = await axios.post('http://localhost:3000/login', { email, password });
-      localStorage.setItem('token', loginResponse.data.token);
-      navigate('/app');
+      const registerResponse = await axios.post(
+        "http://localhost:3000/register",
+        { email, password }
+      );
+      setMessage(registerResponse.data);
+      const loginResponse = await axios.post("http://localhost:3000/login", {
+        email,
+        password,
+      });
+      localStorage.setItem("token", loginResponse.data.token);
+      navigate("/app");
     } catch (error) {
-      console.error('Error registering user:', error);
+      console.error("Error registering user:", error);
       if (error.response && error.response.status === 409) {
-        setMessage('User already exists. Please log in.');
+        setMessage("User already exists. Please log in.");
       } else {
-        setMessage('An error occurred during registration');
+        setMessage("An error occurred during registration");
       }
     }
   };
-  
 
   return (
     <div className="h-screen flex bg-gray-bg1">
@@ -59,9 +64,7 @@ function Signup() {
           </div>
 
           <div className="flex justify-center items-center mt-6">
-            <button
-              className="bg-indigo-600 py-2 px-4 text-sm rounded-lg border border-green hover:bg-indigo-700 shadow-2xl text-white"
-            >
+            <button className="bg-indigo-600 py-2 px-4 text-sm rounded-lg border border-green hover:bg-indigo-700 shadow-2xl text-white hover:scale-95">
               Sign Up
             </button>
           </div>
