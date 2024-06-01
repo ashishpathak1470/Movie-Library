@@ -1,3 +1,4 @@
+// App.js
 import React, { useState, useEffect } from "react";
 import axiosInstance from "./axiosInstance";
 import MovieList from "./comp/MovieList";
@@ -5,6 +6,7 @@ import MovieListHeading from "./comp/MovieListHeading";
 import SearchBox from "./comp/SearchBox";
 import AddFavourites from "./comp/AddFavourite";
 import RemoveFavourites from "./comp/RemoveFavourites";
+import MoviePopup from "./comp/MoviePopup"; // Import the MoviePopup component
 import "./App.css";
 
 const App = () => {
@@ -13,6 +15,7 @@ const App = () => {
   const [searchValue, setSearchValue] = useState("");
   const [message, setMessage] = useState("");
   const [showScrollButton, setShowScrollButton] = useState(true);
+  const [selectedMovie, setSelectedMovie] = useState(null); // State to manage selected movie for the popup
 
   const defaultSearchTerms = [
     "batman",
@@ -62,6 +65,9 @@ const App = () => {
 
   const addFavouriteMovie = async (movie) => {
     try {
+      // Show the selected movie in the popup window
+      setSelectedMovie(movie);
+      // Add the movie to favourites
       const response = await axiosInstance.post("/favourites", { movie });
       if (response.status === 201) {
         const newFavourites = [...favourites, movie];
@@ -105,7 +111,7 @@ const App = () => {
   };
 
   return (
-    <div className="app-container">
+    <div className="app-container py-16">
       <div className="container mx-auto px-4 py-8 relative">
         <div className="flex flex-col items-center">
           <MovieListHeading heading="Movies" />
@@ -114,14 +120,14 @@ const App = () => {
             setSearchValue={setSearchValue}
           />
 
-		  <button
+          <button
             className="scroll-to-favourites-button bg-indigo-600 py-2 px-4 text-sm rounded-lg border border-green hover:bg-indigo-700 shadow-2xl text-white"
             onClick={scrollToFavoriteSection}
           >
             Go to Favorites
           </button>
         </div>
-		
+        
         <div className="flex flex-wrap justify-center">
           <MovieList
             movies={movies}
@@ -144,8 +150,15 @@ const App = () => {
         </div>
       </div>
       {message && <div className="popup-message">{message}</div>}
+      {selectedMovie && (
+        <MoviePopup
+          movie={selectedMovie}
+          onClose={() => setSelectedMovie(null)} // Close the popup when Close button is clicked
+        />
+      )}
     </div>
   );
 };
 
 export default App;
+

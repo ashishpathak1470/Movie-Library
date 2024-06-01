@@ -20,9 +20,14 @@ function Signup() {
       navigate('/app'); // Redirect to the protected route
     } catch (error) {
       console.error('Error registering user:', error);
-      setMessage('An error occurred during registration');
+      if (error.response && error.response.status === 409) {
+        setMessage('User already exists. Please log in.');
+      } else {
+        setMessage('An error occurred during registration');
+      }
     }
   };
+  
 
   return (
     <div className="h-screen flex bg-gray-bg1">

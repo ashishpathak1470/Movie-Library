@@ -82,3 +82,80 @@ body {
   justify-content: center;
   margin-bottom: 20px;
 }
+
+/* App.css */
+.popup-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background to dim other content */
+  z-index: 9999; /* Ensure it's on top of other elements */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup {
+  background-color: white;
+  width: 80%;
+  max-width: 600px;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.popup-content {
+  text-align: center;
+}
+
+.popup button {
+  margin-top: 20px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+.popup button:hover {
+  background-color: #0056b3;
+}
+
+
+/* App.css */
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent gray background */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  z-index: 9999; /* Ensure it's on top of other elements */
+}
+
+.modal-content {
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0); /* Semi-transparent gray background */
+  padding: 20px;
+  border-radius: 8px;
+  
+}
+
+.modal button {
+  margin-top: 20px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: #ff0000; /* Red button */
+  color: white;
+  cursor: pointer;
+}
+
+.modal button:hover {
+  background-color: #cc0000; /* Darker red on hover */
+}
