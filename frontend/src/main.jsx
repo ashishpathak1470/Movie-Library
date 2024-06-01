@@ -4,6 +4,7 @@ import App from './App.jsx'
 import Layout from './Layout.jsx'
 import Home from './comp/Home.jsx'
 import Signin from './comp/Signin.jsx'
+import PrivateRoute from './comp/PrivateRoute.jsx'
 import './index.css'
 import {
   Route,
@@ -20,7 +21,7 @@ const router = createBrowserRouter(
       <Route path="" element={<Home />} />
       <Route path="signin" element={<Signin />} />
       <Route path="signup" element={<Signup />} />
-      <Route path="app" element={<App/>} />
+      <Route path="/app" element={<PrivateRoute component={App} />} />
     </Route>
   )
 );

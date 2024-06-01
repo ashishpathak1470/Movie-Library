@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axiosInstance from './axiosInstance';
 import MovieList from './comp/MovieList';
 import MovieListHeading from './comp/MovieListHeading';
 import SearchBox from './comp/SearchBox';
@@ -16,8 +17,8 @@ const App = () => {
 
 	const getMovieRequest = async (searchValue) => {
 		const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=e1446db8`;
-		const response = await fetch(url);
-		const responseJson = await response.json();
+		const response = await axiosInstance.get(url);
+		const responseJson = await response.data;
 
 		if (responseJson.Search) {
 			setMovies(responseJson.Search);
@@ -69,7 +70,6 @@ const App = () => {
 
 	return (
 		<>
-		
 		<div className='app-container'>
 			<div className='container mx-auto px-4 py-8 relative'>
 				<div className='flex flex-col items-center'>

@@ -1,14 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 function Signup() {
-  const handleFormSubmit = (e) => {
+  const [message, setMessage] = useState("");
+  const navigate = useNavigate();
+
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-
-    let email = e.target.elements.email?.value;
-    let password = e.target.elements.password?.value;
-
-    console.log(email, password);
+  
+    const email = e.target.elements.email?.value;
+    const password = e.target.elements.password?.value;
+  
+    try {
+      const registerResponse = await axios.post('http://localhost:3000/register', { email, password });
+      setMessage(registerResponse.data); // Assuming the server returns a success message
+      const loginResponse = await axios.post('http://localhost:3000/login', { email, password });
+      localStorage.setItem('token', loginResponse.data.token);
+      navigate('/app'); // Redirect to the protected route
+    } catch (error) {
+      console.error('Error registering user:', error);
+      setMessage('An error occurred during registration');
+    }
   };
+
   return (
     <div className="h-screen flex bg-gray-bg1">
       <div className="w-full max-w-md m-auto bg-white rounded-lg border border-primaryBorder shadow-2xl py-10 px-16">
@@ -17,22 +32,11 @@ function Signup() {
         </h1>
 
         <form onSubmit={handleFormSubmit}>
-
-        <div>
-            <label htmlFor="email">Username</label>
-            <input
-              type="email"
-              className={`w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4 shadow-2xl`}
-              id="email"
-              placeholder="Your Username"
-              required
-            />
-          </div>
           <div>
             <label htmlFor="email">Email</label>
             <input
               type="email"
-              className={`w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4 shadow-2xl`}
+              className="w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4 shadow-2xl"
               id="email"
               placeholder="Your Email"
               required
@@ -42,31 +46,21 @@ function Signup() {
             <label htmlFor="password">Password</label>
             <input
               type="password"
-              className={`w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4 shadow-2xl`}
+              className="w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4 shadow-2xl"
               id="password"
               placeholder="Your Password"
               required
             />
           </div>
 
-          <div>
-            <label htmlFor="password">Confirm Password</label>
-            <input
-              type="password"
-              className={`w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4 shadow-2xl`}
-              id="password"
-              placeholder="Confirm Your Password"
-              required
-            />
-          </div>
-
           <div className="flex justify-center items-center mt-6">
             <button
-              className={`bg-indigo-600 py-2 px-4 text-sm  rounded-lg border border-green hover:bg-indigo-700 shadow-2xl text-white`}
+              className="bg-indigo-600 py-2 px-4 text-sm rounded-lg border border-green hover:bg-indigo-700 shadow-2xl text-white"
             >
               Sign Up
             </button>
           </div>
+          {message && <p>{message}</p>}
         </form>
       </div>
     </div>
