@@ -10,7 +10,7 @@ const RemoveFavourites = () => {
 
 	return (
 		<>
-			<span className='mr-2 text-red-500'>Remove from Favourites</span>
+			<span className='mr-2 text-red-500'>Remove from Favorites</span>
 			<svg
 				onClick={handleClick}
 				width='1em'

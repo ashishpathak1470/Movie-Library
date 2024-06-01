@@ -10,7 +10,7 @@ const AddFavourite = () => {
 
 	return (
 		<>
-			<span className='text-red-500'>Add to Favourites</span>
+			<span className='text-red-500'>Add to Favorites</span>
 			<svg
 				onClick={handleClick}
 				width='1em'
