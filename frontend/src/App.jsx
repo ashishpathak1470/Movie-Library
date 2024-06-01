@@ -6,7 +6,7 @@ import MovieListHeading from "./comp/MovieListHeading";
 import SearchBox from "./comp/SearchBox";
 import AddFavourites from "./comp/AddFavourite";
 import RemoveFavourites from "./comp/RemoveFavourites";
-import MoviePopup from "./comp/MoviePopup"; // Import the MoviePopup component
+import MoviePopup from "./comp/MoviePopup"; 
 import "./App.css";
 
 const App = () => {
@@ -15,7 +15,7 @@ const App = () => {
   const [searchValue, setSearchValue] = useState("");
   const [message, setMessage] = useState("");
   const [showScrollButton, setShowScrollButton] = useState(true);
-  const [selectedMovie, setSelectedMovie] = useState(null); // State to manage selected movie for the popup
+  const [selectedMovie, setSelectedMovie] = useState(null);
 
   const defaultSearchTerms = [
     "batman",
@@ -61,13 +61,11 @@ const App = () => {
     };
 
     fetchFavourites();
-  }, []); // Fetch favourites only once on component mount
+  }, []); 
 
   const addFavouriteMovie = async (movie) => {
     try {
-      // Show the selected movie in the popup window
       setSelectedMovie(movie);
-      // Add the movie to favourites
       const response = await axiosInstance.post("/favourites", { movie });
       if (response.status === 201) {
         const newFavourites = [...favourites, movie];
@@ -75,7 +73,6 @@ const App = () => {
         setMessage(`${movie.Title} added to favourites!`);
         setTimeout(() => setMessage(""), 3000);
 
-        // Scroll to the favorites section
         document
           .getElementById("favourites-section")
           .scrollIntoView({ behavior: "smooth" });
@@ -107,7 +104,7 @@ const App = () => {
     document
       .getElementById("favourites-section")
       .scrollIntoView({ behavior: "smooth" });
-    setShowScrollButton(false); // Set showScrollButton state to false
+    setShowScrollButton(false); 
   };
 
   return (
@@ -153,7 +150,7 @@ const App = () => {
       {selectedMovie && (
         <MoviePopup
           movie={selectedMovie}
-          onClose={() => setSelectedMovie(null)} // Close the popup when Close button is clicked
+          onClose={() => setSelectedMovie(null)}
         />
       )}
     </div>

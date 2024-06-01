@@ -16,7 +16,7 @@ function Signin() {
       const response = await axios.post('http://localhost:3000/login', { email, password });
       localStorage.setItem('token', response.data.token);
       setMessage("Logged in successfully");
-      navigate('/app'); // Redirect to the protected route
+      navigate('/app'); 
     } catch (error) {
       console.error('Error logging in:', error);
       setMessage('Invalid email or password');

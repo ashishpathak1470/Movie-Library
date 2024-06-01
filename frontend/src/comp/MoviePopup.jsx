@@ -1,4 +1,3 @@
-// MovieAlertModal.js
 import React from "react";
 
 const MovieAlertModal = ({ movie, onClose }) => {
