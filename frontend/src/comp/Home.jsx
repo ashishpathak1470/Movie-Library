@@ -19,8 +19,9 @@ function Home() {
           <div>
             <div className="w-full h-auto overflow-hidden rounded-md shadow-xl sm:rounded-xl">
               <img
+              className='shadow-2xl'
                 src="https://plus.unsplash.com/premium_vector-1682303466154-2161da750ac7?bg=FFFFFF&w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bW92aWUlMjBsaWJyYXJ5JTIwd2Vic2l0ZXxlbnwwfHwwfHx8MA%3D%3D"
-                alt="Tools"
+                alt="Movie"
               />
             </div>
           </div>
