@@ -14,11 +14,11 @@ function Signup() {
 
     try {
       const registerResponse = await axios.post(
-        "http://localhost:3000/register",
+        "https://movie-library-delta-lime.vercel.app/register",
         { email, password }
       );
       setMessage(registerResponse.data);
-      const loginResponse = await axios.post("http://localhost:3000/login", {
+      const loginResponse = await axios.post("https://movie-library-delta-lime.vercel.app/login", {
         email,
         password,
       });
