@@ -14,11 +14,11 @@ function Signup() {
 
     try {
       const registerResponse = await axios.post(
-        "http://localhost:3000/register",
+        "https://server-1-ctsd.onrender.com/register",
         { email, password }
       );
       setMessage(registerResponse.data);
-      const loginResponse = await axios.post("http://localhost:3000/login", {
+      const loginResponse = await axios.post("https://server-1-ctsd.onrender.com/login", {
         email,
         password,
       });

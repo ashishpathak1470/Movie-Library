@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:3000", // your base URL
+  baseURL: "https://server-1-ctsd.onrender.com",
   headers: {
     "Content-Type": "application/json",
   },
