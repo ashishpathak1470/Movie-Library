@@ -6,6 +6,8 @@ function Signin() {
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
+  axios.defaults.withCredentials = true;
+
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
