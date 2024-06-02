@@ -19,7 +19,7 @@ app.use((req, res, next) => {
 
 app.use(cors(
   {
-    origin: "https://movie-library-srvz.vercel.app",
+    origin: "",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true,
   }

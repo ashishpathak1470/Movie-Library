@@ -14,11 +14,11 @@ function Signup() {
 
     try {
       const registerResponse = await axios.post(
-        "https://movie-library-lovat.vercel.app/register",
+        "http://localhost:3000/register",
         { email, password }
       );
       setMessage(registerResponse.data);
-      const loginResponse = await axios.post("https://movie-library-lovat.vercel.app/login", {
+      const loginResponse = await axios.post("http://localhost:3000/login", {
         email,
         password,
       });
