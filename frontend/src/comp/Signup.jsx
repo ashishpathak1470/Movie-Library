@@ -6,8 +6,6 @@ function Signup() {
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
-  axios.defaults.withCredentials = true;
-
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
@@ -16,11 +14,11 @@ function Signup() {
 
     try {
       const registerResponse = await axios.post(
-        "https://movie-library-delta-lime.vercel.app/register",
+        "http://localhost:3000/register",
         { email, password }
       );
       setMessage(registerResponse.data);
-      const loginResponse = await axios.post("https://movie-library-delta-lime.vercel.app/login", {
+      const loginResponse = await axios.post("http://localhost:3000/login", {
         email,
         password,
       });

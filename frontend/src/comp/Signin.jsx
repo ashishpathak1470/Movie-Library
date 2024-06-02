@@ -6,8 +6,6 @@ function Signin() {
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
-  axios.defaults.withCredentials = true;
-
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
@@ -15,7 +13,7 @@ function Signin() {
     const password = e.target.elements.password?.value;
 
     try {
-      const response = await axios.post("https://movie-library-delta-lime.vercel.app/login", {
+      const response = await axios.post("http://localhost:3000/login", {
         email,
         password,
       });
