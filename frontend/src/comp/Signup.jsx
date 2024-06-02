@@ -27,7 +27,7 @@ function Signup() {
     } catch (error) {
       console.error("Error registering user:", error);
       if (error.response && error.response.status === 409) {
-        setMessage("User already exists. Please log in.");
+        setMessage("User already exists. Please Sign in.");
       } else {
         setMessage("An error occurred during registration");
       }

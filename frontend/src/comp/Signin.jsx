@@ -13,15 +13,15 @@ function Signin() {
     const password = e.target.elements.password?.value;
 
     try {
-      const response = await axios.post("https://server-1-ctsd.onrender.com", {
+      const response = await axios.post("https://server-1-ctsd.onrender.com/login", {
         email,
         password,
       });
       localStorage.setItem("token", response.data.token);
-      setMessage("Logged in successfully");
+      setMessage("Signed in successfully");
       navigate("/app");
     } catch (error) {
-      console.error("Error logging in:", error);
+      console.error("Error Signing in:", error);
       setMessage("Invalid email or password");
     }
   };
