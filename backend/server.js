@@ -19,7 +19,7 @@ app.use((req, res, next) => {
 
 app.use(cors(
   {
-    origin: "https://movie-library-636p.vercel.app",
+    origin: "https://movie-library-636p.vercel.app/signup",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true,
   }
